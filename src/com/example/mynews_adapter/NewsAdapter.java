@@ -6,6 +6,7 @@ import com.example.mynews.R;
 import com.example.mynews_bean.NewsBean;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -65,8 +66,9 @@ public class NewsAdapter extends BaseAdapter {
 	        NewsBean newsBean = list.get(position);  
 	        //4.将数据设置给这些子控件做显示  
 	        item_img_icon.setImageDrawable(newsBean.icon);//设置imageView的图片  
+	        //使用HTML类对带有html标签的字符串进行格式化
 	        item_tv_title.setText(newsBean.title);  
-	        item_tv_des.setText(newsBean.des);  
+	        item_tv_des.setText(Html.fromHtml(newsBean.des));  
 	          
 	        return view;  
 	}

@@ -38,6 +38,19 @@
         </activity>
         <activity android:name="com.example.mynews.NewsDetailActivity" >
         </activity>
+        <activity android:name="com.example.mynews.TitleActivity" >
+        </activity>
+        
+        <provider 
+            android:authorities="com.example.mynews.db"
+            android:name="com.example.mynews.db.NewsContentProvider"
+            android:exported="true">
+        </provider>
+        <provider 
+            android:authorities="com.example.mynews.db"
+            android:name="com.example.mynews.db.CommentContentProvider"
+            android:exported="true">
+        </provider>
     </application>
 
 </manifest>

@@ -1088,15 +1088,35 @@ containing a value of this type.
         public static final int dark=0x7f020057;
         public static final int fish=0x7f020058;
         public static final int ic_launcher=0x7f020059;
-        public static final int one=0x7f02005a;
-        public static final int pick=0x7f02005b;
-        public static final int radiobtn_bg=0x7f02005c;
-        public static final int radiobtn_selector=0x7f02005d;
-        public static final int red=0x7f02005e;
-        public static final int rubbe=0x7f02005f;
-        public static final int three=0x7f020060;
-        public static final int two=0x7f020061;
-        public static final int welcome=0x7f020062;
+        public static final int news_1=0x7f02005a;
+        public static final int news_10=0x7f02005b;
+        public static final int news_11=0x7f02005c;
+        public static final int news_12=0x7f02005d;
+        public static final int news_13=0x7f02005e;
+        public static final int news_14=0x7f02005f;
+        public static final int news_15=0x7f020060;
+        public static final int news_16=0x7f020061;
+        public static final int news_17=0x7f020062;
+        public static final int news_18=0x7f020063;
+        public static final int news_19=0x7f020064;
+        public static final int news_2=0x7f020065;
+        public static final int news_20=0x7f020066;
+        public static final int news_21=0x7f020067;
+        public static final int news_3=0x7f020068;
+        public static final int news_4=0x7f020069;
+        public static final int news_5=0x7f02006a;
+        public static final int news_6=0x7f02006b;
+        public static final int news_8=0x7f02006c;
+        public static final int news_9=0x7f02006d;
+        public static final int one=0x7f02006e;
+        public static final int pick=0x7f02006f;
+        public static final int radiobtn_bg=0x7f020070;
+        public static final int radiobtn_selector=0x7f020071;
+        public static final int red=0x7f020072;
+        public static final int rubbe=0x7f020073;
+        public static final int three=0x7f020074;
+        public static final int two=0x7f020075;
+        public static final int welcome=0x7f020076;
     }
     public static final class id {
         public static final int action_bar=0x7f05001c;
@@ -1511,16 +1531,16 @@ containing a value of this type.
         public static final int Widget_AppCompat_ProgressBar=0x7f0b000a;
         public static final int Widget_AppCompat_ProgressBar_Horizontal=0x7f0b0009;
         public static final int Widget_AppCompat_Spinner_DropDown_ActionBar=0x7f0b0022;
-        /**  全屏幕拉伸
+        /**  鍏ㄥ睆骞曟媺浼�
          */
         public static final int layout_full=0x7f0b008b;
-        /**  横向分布
+        /**  妯悜鍒嗗竷
          */
         public static final int layout_horizontal=0x7f0b008d;
-        /**  纵向分布
+        /**  绾靛悜鍒嗗竷
          */
         public static final int layout_vertical=0x7f0b008e;
-        /**  固定自身大小
+        /**  鍥哄畾鑷韩澶у皬
          */
         public static final int layout_wrap=0x7f0b008c;
     }

@@ -36,6 +36,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="des"
+            android:maxEms="17"
+			android:singleLine="true"
+			android:ellipsize="end"
             android:textColor="#666666"
             android:textSize="13sp" />
     </LinearLayout>

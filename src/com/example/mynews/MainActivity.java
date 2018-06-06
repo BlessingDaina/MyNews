@@ -10,10 +10,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBarActivity;
 import android.app.LocalActivityManager;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 /**
  * HorizontalScrollView和ViewPager联动效果
  * 上HorizontalScrollView下ViewPager
@@ -73,38 +78,34 @@ public class MainActivity extends ActionBarActivity {
 		map.put("id", 0);
 		map.put("title", "新闻");
 		titleList.add(map);
-		map = new HashMap<String, Object>();
-		map.put("id", 1);
-		map.put("title", "网页");
-		titleList.add(map);
 
 		map = new HashMap<String, Object>();
-		map.put("id", 2);
+		map.put("id", 1);
 		map.put("title", "体育");
 		titleList.add(map);
 
 		map = new HashMap<String, Object>();
-		map.put("id", 3);
+		map.put("id", 2);
 		map.put("title", "彩票");
 		titleList.add(map);
 
 		map = new HashMap<String, Object>();
-		map.put("id", 4);
+		map.put("id", 3);
 		map.put("title", "世界杯");
 		titleList.add(map);
 
 		map = new HashMap<String, Object>();
-		map.put("id", 5);
+		map.put("id", 4);
 		map.put("title", "国际");
 		titleList.add(map);
 
 		map = new HashMap<String, Object>();
-		map.put("id", 6);
+		map.put("id", 5);
 		map.put("title", "娱乐");
 		titleList.add(map);
 
 		map = new HashMap<String, Object>();
-		map.put("id", 7);
+		map.put("id", 6);
 		map.put("title", "军事");
 		titleList.add(map);
 	}
@@ -180,8 +181,8 @@ public class MainActivity extends ActionBarActivity {
 	private void iniVariable(){
 		mViews = new ArrayList<View>();
 		for (int i = 0 ; i < titleList.size(); i++){
-			Intent intent1 = new Intent(this,Main01Activity.class);
-			intent1.putExtra("id", i);
+			Intent intent1 = new Intent(this,Main01Activity.class);   //启动组件
+			intent1.putExtra("id", i);        //添加信息
 			mViews.add(getView("View"+i, intent1));
 			mViewPager.setAdapter(new MyPagerAdapter());//设置ViewPager的适配器
 		}
