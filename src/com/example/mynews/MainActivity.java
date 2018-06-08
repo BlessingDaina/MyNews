@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -16,12 +19,14 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.animation.AnimationSet;
@@ -55,6 +60,43 @@ public class MainActivity extends ActionBarActivity {
 	
 	private LinearLayout layout,titleLayout;
 	private TextView textView;
+	
+	//轮播图相关
+		private ViewPager bViewPaper;  
+	    private List<ImageView> bimages;  
+	    private List<View> bdots;  
+	    private int bcurrentItem;  
+	    //记录上一次点的位置  
+	    private int boldPosition = 0;  
+	    //存放图片的地址  
+	    private int[] bimageIds = new int[]{  
+	            R.drawable.a,  
+	            R.drawable.b,  
+	            R.drawable.c,  
+	            R.drawable.d,  
+	            R.drawable.e  
+	    }; 
+	    //存图片的id
+	    private int[] imgae_ids = new int[]{R.id.a,R.id.b,R.id.c,R.id.d,R.id.e};
+	  //存放图片的标题  
+	    private String[]  btitles = new String[]{  
+	            "阿里铁军内训销售课曝光：怎样赚100万",   
+	            "超级搜索术！人生80%问题早有答案",    
+	            "“最强大脑”记忆女神教你突破记忆极限",     
+	            "靠PPT年入30万？做到这九点，你也月入过万",      
+	            "这样学英语，才最有效"  
+	    };  
+	    //存放广告URL
+	    private String[] burls = new String[]{
+	    		"https://vip.open.163.com/courses/966",
+	    		"https://vip.open.163.com/courses/853",
+	    		"https://vip.open.163.com/courses/206",
+	    		"https://vip.open.163.com/courses/780",
+	    		"https://vip.open.163.com/courses/797"
+	    };
+	    private TextView btitle;  
+	    private bViewPagerAdapter badapter;  
+	    private ScheduledExecutorService bscheduledExecutorService;  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,6 +112,54 @@ public class MainActivity extends ActionBarActivity {
 		iniVariable();
 		
 		mViewPager.setCurrentItem(0);
+		
+		//轮播图相关
+				bViewPaper = (ViewPager) findViewById(R.id.vp);
+			       //显示的图片  
+			         bimages = new ArrayList<ImageView>();  
+			         for(int i = 0; i < bimageIds.length; i++){  
+			             ImageView bimageView = new ImageView(this);  
+			             bimageView.setBackgroundResource(bimageIds[i]); 
+			             bimageView.setId(imgae_ids[i]);
+			             bimageView.setOnClickListener(new pagerImageOnClick());//设置图片点击事件
+			             bimages.add(bimageView);  
+			         }  
+			       //显示的小点  
+			         bdots = new ArrayList<View>();  
+			         bdots.add(findViewById(R.id.dot_0));  
+			         bdots.add(findViewById(R.id.dot_1));  
+			         bdots.add(findViewById(R.id.dot_2));  
+			         bdots.add(findViewById(R.id.dot_3));  
+			         bdots.add(findViewById(R.id.dot_4));
+			         
+			         btitle = (TextView) findViewById(R.id.title);  
+			         btitle.setText(btitles[0]);  
+			           
+			         badapter = new bViewPagerAdapter();  
+			         bViewPaper.setAdapter(badapter);  
+			         
+			         bViewPaper.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+						
+						public void onPageSelected(int position) {
+							// TODO Auto-generated method stub
+							btitle.setText(btitles[position]);  
+			                bdots.get(position).setBackgroundResource(R.drawable.dot_focused);  
+			                bdots.get(boldPosition).setBackgroundResource(R.drawable.dot_normal);  
+			                  
+			                boldPosition = position;  
+			                bcurrentItem = position;
+						}
+						
+						public void onPageScrolled(int arg0, float arg1, int arg2) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						public void onPageScrollStateChanged(int arg0) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
 	}
 	
 	private List<Map<String,Object>> titleList = new ArrayList<Map<String,Object>>();
@@ -271,12 +361,12 @@ public class MainActivity extends ActionBarActivity {
 		
 	}
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.main, menu);
+//		return true;
+//	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -289,4 +379,112 @@ public class MainActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	//轮播图相关
+	
+		//图片点击事件
+	    private class pagerImageOnClick implements View.OnClickListener{
+
+	        public void onClick(View v) {
+	        	//跳转浏览器  
+	            Intent intent = new Intent();  
+	            intent.setAction(Intent.ACTION_VIEW); 
+	        	switch (v.getId()){
+		        	case R.id.a: 
+		                intent.setData(Uri.parse(burls[0]));  
+		                break;
+		        	case R.id.b: 
+		                intent.setData(Uri.parse(burls[1]));  
+		                break;
+		        	case R.id.c: 
+		                intent.setData(Uri.parse(burls[2]));  
+		                break;
+		        	case R.id.d: 
+		                intent.setData(Uri.parse(burls[3]));  
+		                break;
+		        	case R.id.e: 
+		                intent.setData(Uri.parse(burls[4]));  
+		                break;
+	        	}
+	        	startActivity(intent);
+	        }
+	    }
+		private class bViewPagerAdapter extends PagerAdapter {
+
+			@Override
+			public int getCount() {
+				// TODO Auto-generated method stub
+				return bimages.size();
+			}
+
+			@Override
+			public boolean isViewFromObject(View arg0, Object arg1) {
+				// TODO Auto-generated method stub
+				return arg0 == arg1;
+			}
+			
+			@Override
+			public void destroyItem(ViewGroup view,int position,Object object){
+				view.removeView(bimages.get(position));
+			}
+			
+			@Override
+			public Object instantiateItem(ViewGroup view,int position){
+				view.addView(bimages.get(position));  
+	            return bimages.get(position);  
+			}
+	    	
+	    }
+	    
+	    @Override
+	    public boolean onCreateOptionsMenu(Menu menu){
+	    	getMenuInflater().inflate(R.menu.main, menu);  
+	        return true; 
+	    }
+	    
+	    /** 
+	     * 利用线程池定时执行动画轮播 
+	     */  
+	    @Override  
+	    protected void onStart() {  
+	        // TODO Auto-generated method stub  
+	        super.onStart();  
+	        bscheduledExecutorService = Executors.newSingleThreadScheduledExecutor();  
+	        bscheduledExecutorService.scheduleWithFixedDelay(  
+	                new ViewPageTask(),   
+	                2,   
+	                2,   
+	                TimeUnit.SECONDS);  
+	    }  
+	    
+	    /** 
+	     * 图片轮播任务 
+	     * 
+	     */  
+	    private class ViewPageTask implements Runnable{
+
+			public void run() {
+				// TODO Auto-generated method stub
+				bcurrentItem = (bcurrentItem + 1) % bimageIds.length;  
+	            bHandler.sendEmptyMessage(0);
+			} 
+	        
+	    }  
+	    /** 
+	     * 接收子线程传递过来的数据 
+	     */  
+	    private Handler bHandler = new Handler(){  
+	        public void handleMessage(android.os.Message msg) {  
+	        	bViewPaper.setCurrentItem(bcurrentItem);  
+	        };  
+	    };  
+	    
+	    @Override  
+	    protected void onStop() {  
+	        // TODO Auto-generated method stub  
+	        super.onStop();  
+	        if(bscheduledExecutorService != null){  
+	            bscheduledExecutorService.shutdown();  
+	            bscheduledExecutorService = null;  
+	        }  
+	    }    
 }
