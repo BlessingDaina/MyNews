@@ -74,7 +74,7 @@ public class Main01Activity extends Activity {
 		  
 		        //Ìø×ªä¯ÀÀÆ÷  
 		        Intent intent = new Intent(Main01Activity.this,NewsDetailActivity.class);
-		        intent.putExtra("newBean", (Serializable)bean);
+//		        intent.putExtra("newBean", (Serializable)bean);
 		        intent.setData(Uri.parse(url));  
 		        startActivity(intent);
 		        
