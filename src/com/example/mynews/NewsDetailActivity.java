@@ -40,12 +40,6 @@ public class NewsDetailActivity extends Activity {
 		comment_listView = (ListView) findViewById(R.id.comment_listView);
 		list = new ArrayList<Comments>();
 		
-		list.add(new Comments(0,"2018/06/08\t\t14:53", "派军舰过台湾海峡，B-52飞抵中国南沙，放这些传闻的美国想唬谁这个地方尚未形成中美唬谁这个地方尚未形成唬谁这个地方尚未形成军事."));
-		list.add(new Comments(0,"2018/06/08\t\t14:53", "派军舰过台湾海峡，B-52飞抵中国南沙，放这些传闻的美国想唬谁这个地方尚未形成中美军事."));
-		list.add(new Comments(0,"2018/06/08\t\t14:53", "派军舰过台湾海峡，B-52飞抵中国南沙，放这些传闻的美国想唬谁这个地方尚未形成中美军事."));
-		list.add(new Comments(0,"2018/06/08\t\t14:53", "派军舰过台湾海峡，B-52飞抵中国南沙，放这些传闻的美国想唬谁这个地方尚未形成中美军事."));
-		list.add(new Comments(0,"2018/06/08\t\t14:53", "派军舰过台湾海峡，B-52飞抵中国南沙，放这些传闻的美国想唬谁这个地方尚未形成中美军事."));
-		
 		
 		
 		//获取显示详情容器
@@ -56,7 +50,6 @@ public class NewsDetailActivity extends Activity {
         Intent intent =getIntent();
         
         /*取出Intent中附加的数据*/ 
-//        int id = intent.getIntExtra("id", 100);
         String title = intent.getStringExtra("title");   
         String time = intent.getStringExtra("news_time");    
         String content = intent.getStringExtra("des");
@@ -67,12 +60,12 @@ public class NewsDetailActivity extends Activity {
         news_detail_content.setText(Html.fromHtml(content));
         
       //查找评论
-//        ContentResolver cr2 = NewsDetailActivity.this.getContentResolver();
-//		Uri uri2 = Uri.parse("content://com.example.mynews.db/comments_table");
-//		
-//		Cursor c2 = cr2.query(uri2, null, null, null,null );
-//		ArrayList<Comments> list = NewsUtils.getAllComments(context,c2,intent.getIntExtra("news_id", 0));
-//		
+        ContentResolver cr2 = NewsDetailActivity.this.getContentResolver();
+		Uri uri2 = Uri.parse("content://com.example.mynews.db/comments_table");
+		
+		Cursor c2 = cr2.query(uri2, null, null, null,null );
+		ArrayList<Comments> list = NewsUtils.getAllComments(context,c2,intent.getIntExtra("news_id", 0));
+		
 //		
 		System.out.println("newsdetailsActivity");
 		cAdapter = new commentAdapter((ArrayList<Comments>) list, context);

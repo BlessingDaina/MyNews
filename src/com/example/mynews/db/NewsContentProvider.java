@@ -15,9 +15,11 @@ public class NewsContentProvider extends ContentProvider{
 	//定义一个UriMatcher对象
 	private static final UriMatcher MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
 	private static final int NEW_TABLE = 1;
+	private static final int COMMENT_TABLE = 2;
 	
 	static {
 		MATCHER.addURI("com.example.mynews.db", "news_table", NEW_TABLE);
+		MATCHER.addURI("com.example.mynews.db", "comments_table", COMMENT_TABLE);
 	}
 	
 
@@ -27,6 +29,8 @@ public class NewsContentProvider extends ContentProvider{
 		switch (MATCHER.match(uri)){
 		case NEW_TABLE:
 			return "vnd.android.cursor.dir/news_table";
+		case COMMENT_TABLE:
+			return "vnd.android.cursor.dir/comments_table";
 		default:
 			throw new IllegalArgumentException("Unknow uri: "+uri.toString());
 		
@@ -42,6 +46,10 @@ public class NewsContentProvider extends ContentProvider{
 		switch (MATCHER.match(uri)){
 			case NEW_TABLE:
 				long rowId = db.insert("news_table", "", values);
+				insertUri = ContentUris.withAppendedId(uri, rowId);
+				return insertUri;
+			case COMMENT_TABLE:
+				rowId = db.insert("comments_table", "", values);
 				insertUri = ContentUris.withAppendedId(uri, rowId);
 				return insertUri;
 			default:
@@ -67,6 +75,8 @@ public class NewsContentProvider extends ContentProvider{
 		switch (MATCHER.match(uri)){
 			case NEW_TABLE:
 				return db.query("news_table", projection, selection, selectionArgs, null, null, sortOrder);
+			case COMMENT_TABLE:
+				return db.query("comments_table", projection, selection, selectionArgs, null, null, sortOrder);
 			default:
 				throw new IllegalArgumentException("Unknow uri: "+uri.toString());
 			
@@ -84,6 +94,9 @@ public class NewsContentProvider extends ContentProvider{
 			case NEW_TABLE:
 				count = db.delete("news_table", selection, selectionArgs);
 				return count;
+			case COMMENT_TABLE:
+				count = db.delete("comments_table", selection, selectionArgs);
+				return count;
 			default:
 				throw new IllegalArgumentException("Unknow uri: "+uri.toString());
 			
@@ -99,6 +112,9 @@ public class NewsContentProvider extends ContentProvider{
 		switch (MATCHER.match(uri)){
 			case NEW_TABLE:
 				count = db.update("news_table",values, selection, selectionArgs);
+				return count;
+			case COMMENT_TABLE:
+				count = db.update("comments_table",values, selection, selectionArgs);
 				return count;
 			default:
 				throw new IllegalArgumentException("Unknow uri: "+uri.toString());

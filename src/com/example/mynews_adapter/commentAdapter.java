@@ -59,8 +59,8 @@ public class commentAdapter extends BaseAdapter{
         TextView comment_content = (TextView) view.findViewById(R.id.comment_content);
         
         Comments comment = commentList.get(position);
-        comment_time.setText(commentList.get(position).getComment_time());
-        comment_content.setText(commentList.get(position).getComment());
+        comment_time.setText(Html.fromHtml(commentList.get(position).getComment_time()));
+        comment_content.setText(Html.fromHtml(commentList.get(position).getComment()));
           
         return view; 
 	}

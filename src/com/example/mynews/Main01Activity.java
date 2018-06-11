@@ -54,10 +54,6 @@ public class Main01Activity extends Activity {
 		
 		Cursor c = cr.query(uri, null, null, null,null );
 		
-//		String str = "";
-//		for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
-//			Toast.makeText(MainActivity.this, "第"+c.getInt(0)+"条记录", Toast.LENGTH_SHORT).show();
-//		}
         ArrayList<NewsBean> allNews = NewsUtils.getAllNews(mContext,c,typeid);  
 //        System.out.println("输出类型:"+id);
         //2.找到控件  
@@ -76,28 +72,19 @@ public class Main01Activity extends Activity {
 		        NewsBean bean = (NewsBean) parent.getItemAtPosition(position);  
 		        
         
-		        String url = bean.news_url;
 		        
 		        
-		        System.out.println("输出时间时间--------："+bean.news_time);
+		        //System.out.println("输出时间时间--------："+bean.news_time);
 		        
 		        //跳转浏览器  
 		        Intent intent = new Intent(Main01Activity.this,NewsDetailActivity.class);
 		        
-		        
 		       
-		        
-		        //传递数据到newsDeatilActivity
-//		        intent.putExtra("title", news_title);
-//		        intent.putExtra("des", des);
-//		        intent.putExtra("news_time", news_time);
 //		        
 		        intent.putExtra("news_id",bean.id);
 		        intent.putExtra("title", (String)bean.title);
 		        intent.putExtra("des", (String)bean.des);
-		        intent.putExtra("news_time", (String)bean.news_time);
-		        Log.v("跳转详情获取新闻id",String.valueOf( bean.id));
-		        intent.setData(Uri.parse(url));  
+		        intent.putExtra("news_time", (String)bean.news_time); 
 		        startActivity(intent);
 			}
 			

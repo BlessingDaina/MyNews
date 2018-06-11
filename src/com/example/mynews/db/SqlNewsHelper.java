@@ -2,6 +2,7 @@ package com.example.mynews.db;
 
 import java.util.ArrayList;
 
+import com.example.mynews_bean.Comments;
 import com.example.mynews_bean.News;
 
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 public class SqlNewsHelper extends SQLiteOpenHelper{
 
@@ -27,7 +29,6 @@ public class SqlNewsHelper extends SQLiteOpenHelper{
 				+"title VARCHAR ,"
 				+"des VARCHAR ,"
 				+"img VARCHAR,"
-				+"news_url VARCHAR ,"
 				+"news_time VARCHAR)";
 		db.execSQL(sql);
 		
@@ -38,7 +39,7 @@ public class SqlNewsHelper extends SQLiteOpenHelper{
 		Newslist newlist = new Newslist();
 		lists = newlist.initNews();
 		
-		String _sql = "insert into news_table(type_id,title,des,img,news_url,news_time) values(?,?,?,?,?,?)";  
+		String _sql = "insert into news_table(type_id,title,des,img,news_time) values(?,?,?,?,?)";  
         SQLiteStatement stat = db.compileStatement(_sql);  
         db.beginTransaction();  
         for (News list : lists) {  
@@ -46,14 +47,38 @@ public class SqlNewsHelper extends SQLiteOpenHelper{
             stat.bindString(2, list.getTitle());  
             stat.bindString(3, list.getDes()); 
             stat.bindString(4, list.getImg());  
-            stat.bindString(5, list.getNews_url());
-            stat.bindString(6, list.getNews_time());
-            
+            stat.bindString(5, list.getNews_time());
             stat.executeInsert();  
         }  
         db.setTransactionSuccessful();  
-        db.endTransaction();   
-	}
+        db.endTransaction();  
+        
+        
+        
+        sql = "CREATE TABLE comments_table ("
+				+"id INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+"news_id INTEGER ,"
+				+"comment VARCHAR ,"
+				+"comment_time VARCHAR)";
+		db.execSQL(sql);
+		//初始化数据
+		ArrayList<Comments> Clists = new ArrayList<Comments>();
+		CommentsList commentlist = new CommentsList();
+		Clists = commentlist.initComments();
+		
+		_sql = "insert into comments_table(news_id,comment,comment_time) values(?,?,?)";  
+        stat = db.compileStatement(_sql);  
+        db.beginTransaction();  
+        for (Comments list : Clists) {  
+            stat.bindLong(1, list.getNews_id()) ;
+            stat.bindString(2, list.getComment());  
+            stat.bindString(3, list.getComment_time());
+            
+            stat.executeInsert();  
+	        }  
+	        db.setTransactionSuccessful();  
+	        db.endTransaction();
+}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {

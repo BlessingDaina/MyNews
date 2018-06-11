@@ -31,7 +31,6 @@ public class NewsUtils {
 				newsBean.type_id = c.getInt(1);
 				newsBean.title =c.getString(2);  
 				newsBean.des= c.getString(3);
-				newsBean.news_url= c.getString(0);
 				newsBean.news_time= c.getString(5);
 				if(c.getString(4) != ""){
 					img = c.getString(c.getColumnIndex("img"));
@@ -40,8 +39,6 @@ public class NewsUtils {
 				//int imgID = getResourceIdByIdentifier(context,img);;
 				newsBean.icon = resources.getDrawable(R.drawable.dark);  
 				arrayList.add(newsBean);
-				Log.v("新闻id，数据库获取", String.valueOf(c.getInt(0)));
-				Log.v("新闻id，newsBean获取",String.valueOf( newsBean.id));
     		}
 		}
         return arrayList;
@@ -52,12 +49,12 @@ public class NewsUtils {
     	Resources resources = context.getResources();
     	for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
     		//根据菜单的id获取不同类型的新闻
-    		if(c.getInt(0) == news_id){
+    		if(c.getInt(1) == news_id){
     			Comments cm = new Comments();
     			cm.setId(c.getInt(0));
     			cm.setNews_id(c.getInt(1));
-    			cm.setComment(c.getString(2));
-    			cm.setComment_time(c.getString(3));
+    			cm.setComment(c.getString(3));
+    			cm.setComment_time(c.getString(2));
 
     			list.add(cm);
     		}
