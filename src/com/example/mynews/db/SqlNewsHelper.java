@@ -13,7 +13,8 @@ import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
 public class SqlNewsHelper extends SQLiteOpenHelper{
-
+	
+	
 	public SqlNewsHelper(Context context, String name,
 			CursorFactory factory, int version) {
 		super(context, name, factory, version);
