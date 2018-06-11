@@ -4,5 +4,12 @@
     <string name="app_name">网易新闻</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
+    <string name="detail_tip">新闻详情</string>
+	<string name="detail_title">派舰过台湾、军机抵南沙 美国放这些传闻想唬谁？</string>
+    <string name="detail_content"><p>（原标题：派军舰过台湾海峡，B-52飞抵中国南沙，放这些传闻的美国想唬谁？） </p>\n <p> 台海这个地方尚未形成中美军事对峙，希望那一天不会到来。但是一旦出现那种糟糕局面，中国肯定无处可退，为维护国家主权和尊严不惜付出任何代价。</p>\n  <p>据西方媒体报道，美国正在考虑派遣一艘军舰通过台湾海峡。如果消息属实，意味着华盛顿准备采取更多行动来展示其对华施压的姿态。在这个消息传出的同一天，美国两架B-52轰炸机被报道从关岛起飞抵近中国南沙群岛，但是随后美国太平洋空军发言人又否认那两架B-52飞到了南沙附近。 </p>\n</string>
+    <string name="send_tip">发表</string>
+    <string name="detail_time">2018/06/08\t\t14:53</string>
+    <string name="comment_tip">精彩评论</string>
+    <string name="comment_time">2018/06/08\t\t14:53</string>
+    <string name="comment_content">派军舰过台湾海峡，B-52飞抵中国南沙，放这些传闻的美国想唬谁这个地方尚未形成中美军事.</string>
 </resources>

@@ -9,4 +9,5 @@ public class NewsBean {
 	public String des;
 	public Drawable icon;
 	public String news_url;
+	public String news_time;
 }
