@@ -1,5 +1,6 @@
 package com.example.mynews_adapter;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import com.example.mynews_bean.Comments;
@@ -16,10 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class commentAdapter extends BaseAdapter{
-	private LinkedList<Comments> commentList;
+	private ArrayList<Comments> commentList;
     private Context context;
 
-    public commentAdapter(LinkedList<Comments> commentList, Context context) {
+    public commentAdapter(ArrayList<Comments> commentList, Context context) {
         this.commentList = commentList;
         this.context = context;
     }

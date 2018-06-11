@@ -27,7 +27,8 @@ public class SqlNewsHelper extends SQLiteOpenHelper{
 				+"title VARCHAR ,"
 				+"des VARCHAR ,"
 				+"img VARCHAR,"
-				+"news_url VARCHAR )";
+				+"news_url VARCHAR ,"
+				+"news_time VARCHAR)";
 		db.execSQL(sql);
 		
 		
@@ -37,7 +38,7 @@ public class SqlNewsHelper extends SQLiteOpenHelper{
 		Newslist newlist = new Newslist();
 		lists = newlist.initNews();
 		
-		String _sql = "insert into news_table(type_id,title,des,img,news_url) values(?,?,?,?,?)";  
+		String _sql = "insert into news_table(type_id,title,des,img,news_url,news_time) values(?,?,?,?,?,?)";  
         SQLiteStatement stat = db.compileStatement(_sql);  
         db.beginTransaction();  
         for (News list : lists) {  
@@ -46,6 +47,8 @@ public class SqlNewsHelper extends SQLiteOpenHelper{
             stat.bindString(3, list.getDes()); 
             stat.bindString(4, list.getImg());  
             stat.bindString(5, list.getNews_url());
+            stat.bindString(6, list.getNews_time());
+            
             stat.executeInsert();  
         }  
         db.setTransactionSuccessful();  

@@ -8,15 +8,20 @@ public class News {
 	public String des;
 	public String img;
 	public String news_url;
+	public String news_time;
 	
+	public News(){
+		
+	}
 	public News(int type_id, String title, String des, String img,
-			String news_url) {
+			String news_url,String news_time) {
 		// TODO Auto-generated constructor stub
 		this.type_id = type_id;
 		this.title = title;
 		this.des = des;
 		this.img = img;
 		this.news_url = news_url;
+		this.news_time = news_time;
 	}
 	public int getId() {
 		return id;
@@ -53,6 +58,12 @@ public class News {
 	}
 	public void setNews_url(String news_url) {
 		this.news_url = news_url;
+	}
+	public String getNews_time() {
+		return news_time;
+	}
+	public void setNews_time(String news_time) {
+		this.news_time = news_time;
 	}
 	
 	

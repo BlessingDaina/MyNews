@@ -61,13 +61,14 @@ public class NewsAdapter extends BaseAdapter {
 	        //2.获取view上的子控件对象  
 	        ImageView item_img_icon = (ImageView) view.findViewById(R.id.item_img_icon);  
 	        TextView item_tv_des = (TextView) view.findViewById(R.id.item_tv_des);  
+ 
 	        TextView item_tv_title = (TextView) view.findViewById(R.id.item_tv_title);  
 	        //3.获取postion位置条目对应的list集合中的新闻数据，Bean对象  
 	        NewsBean newsBean = list.get(position);  
 	        //4.将数据设置给这些子控件做显示  
 	        item_img_icon.setImageDrawable(newsBean.icon);//设置imageView的图片  
 	        //使用HTML类对带有html标签的字符串进行格式化
-	        item_tv_title.setText(newsBean.title);  
+	        item_tv_title.setText(newsBean.title);
 	        item_tv_des.setText(Html.fromHtml(newsBean.des));  
 	          
 	        return view;  
