@@ -71,10 +71,11 @@ public class Main01Activity extends Activity {
 		        NewsBean bean = (NewsBean) parent.getItemAtPosition(position);  
 		  
 		        String url = bean.news_url;
+		        Log.v("跳转详情获取新闻id",String.valueOf( bean.id));
 		  
 		        //跳转浏览器  
 		        Intent intent = new Intent(Main01Activity.this,NewsDetailActivity.class);
-		        intent.putExtra("newBean", (Serializable)bean);
+		       // intent.putExtra("newBean", (Serializable)bean);
 		        intent.setData(Uri.parse(url));  
 		        startActivity(intent);
 		        

@@ -35,6 +35,10 @@ public class NewsUtils {
 				//int imgID = getResourceIdByIdentifier(context,img);;
 				newsBean.icon = resources.getDrawable(R.drawable.dark);  
 				arrayList.add(newsBean);
+//				Log.isLoggable("新闻id，数据库获取", c.getInt(c.getColumnIndex("id")));
+//				Log.isLoggable("新闻id，newsBean获取", newsBean.id);
+				Log.v("新闻id，数据库获取", String.valueOf(c.getInt(0)));
+				Log.v("新闻id，newsBean获取",String.valueOf( newsBean.id));
     		}
 		}
         return arrayList;
