@@ -22,7 +22,7 @@ public class NewsUtils {
     	ArrayList<NewsBean> arrayList = new ArrayList<NewsBean>();  
     	Resources resources = context.getResources();
     	
-    	String img = "dark";
+    	String img = "news_1";
     	for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
     		//根据菜单的id获取不同类型的新闻
     		if(c.getInt(1) == meun_id){
@@ -32,12 +32,17 @@ public class NewsUtils {
 				newsBean.title =c.getString(2);  
 				newsBean.des= c.getString(3);
 				newsBean.news_time= c.getString(5);
+				newsBean.news_url = c.getString(4);
 				if(c.getString(4) != ""){
 					img = c.getString(c.getColumnIndex("img"));
+					Log.v("XXX", img);
 				}
+				int id = context.getResources().getIdentifier(img, "drawable",
+						 context.getPackageName());
 				int resLD = resources.getIdentifier(img, "drawable",context.getPackageName());
+				System.out.print(resLD);
 				//int imgID = getResourceIdByIdentifier(context,img);;
-				newsBean.icon = resources.getDrawable(R.drawable.dark);  
+				newsBean.icon = resources.getDrawable(id);  
 				arrayList.add(newsBean);
     		}
 		}
@@ -57,6 +62,7 @@ public class NewsUtils {
     			cm.setComment_time(c.getString(2));
 
     			list.add(cm);
+    			Log.v("dddd", c.getString(3));
     		}
     	}
 		return list;

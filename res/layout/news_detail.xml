@@ -30,7 +30,7 @@
 		        
 			     <ImageView
 			        android:layout_gravity="left"
-			        android:id="@+id/item_img_icon"
+			        android:id="@+id/comment_img"
 			        android:layout_width="80dp"
 			        android:layout_height="80dp"
 			        android:layout_marginTop="10dp"
@@ -45,7 +45,7 @@
 			        android:layout_marginLeft="15dp"
 			        android:layout_marginRight="10dp"
 			        android:layout_marginTop="10dp"
-			       	android:layout_toRightOf="@+id/item_img_icon"
+			       	android:layout_toRightOf="@+id/comment_img"
 			        android:textColor="#000000"
 					android:ellipsize="end"
 			        android:textSize="20sp" />

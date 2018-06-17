@@ -85,6 +85,7 @@ public class Main01Activity extends Activity {
 		        intent.putExtra("title", (String)bean.title);
 		        intent.putExtra("des", (String)bean.des);
 		        intent.putExtra("news_time", (String)bean.news_time); 
+		        intent.putExtra("news_url", bean.news_url); 
 		        startActivity(intent);
 			}
 			
