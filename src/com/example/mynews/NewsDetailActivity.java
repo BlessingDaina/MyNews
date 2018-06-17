@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -75,8 +76,8 @@ public class NewsDetailActivity extends Activity {
         news_detail_content.setText(Html.fromHtml(content));
         
       //查找评论
-        ContentResolver cr2 = NewsDetailActivity.this.getContentResolver();
-		Uri uri2 = Uri.parse("content://com.example.mynews.db/comments_table");
+        final ContentResolver cr2 = NewsDetailActivity.this.getContentResolver();
+		final Uri uri2 = Uri.parse("content://com.example.mynews.db/comments_table");
 		
 		Cursor c2 = cr2.query(uri2, null, null, null,null );
 		ArrayList<Comments> list = NewsUtils.getAllComments(context,c2,intent.getIntExtra("news_id", 0));
@@ -97,23 +98,54 @@ public class NewsDetailActivity extends Activity {
 				
 				SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 				
+				//1
 				SQLiteDatabase db = helper.getWritableDatabase(); 
 				ContentValues values = new ContentValues();
 				
+				db.beginTransaction();
+
 				values.put("news_id", intent.getIntExtra("news_id", 0));
 				values.put("comment", area.getText().toString());
 				values.put("comment_time", df.format(new Date()));
 				long id = db.insert("comments_table","", values);
+				db.setTransactionSuccessful();
 				
+				
+				//2
+//				SQLiteDatabase db = null;
+//				String _sql = "insert into comments_table(news_id,comment,comment_time) values(?,?,?)";  
+//				SQLiteStatement stat = db.compileStatement(_sql);  
+//		        db.beginTransaction();  
+//		       
+//	            stat.bindLong(1, intent.getIntExtra("news_id", 0)) ;
+//	            stat.bindString(2, area.getText().toString());  
+//	            stat.bindString(3, df.format(new Date()));
+//		            
+//	            stat.executeInsert();  
+//		        
+//		        db.setTransactionSuccessful();  
+//		        db.endTransaction();
+		        
+//		        Cursor c2 = cr2.query(uri2, null, null, null,null );
+//				ArrayList<Comments> list = NewsUtils.getAllComments(context,c2,intent.getIntExtra("news_id", 0));
+//					
+//				System.out.println("newsdetailsActivity");
+//				cAdapter = new commentAdapter((ArrayList<Comments>) list, context);
+//				comment_listView.setAdapter(cAdapter);
+//				
+//				Toast.makeText(NewsDetailActivity.this, list.size(), Toast.LENGTH_SHORT).show();
+//				
+//				Log.v("评论长度",String.valueOf(list.size()));
 				Log.v("评论内容：", area.getText().toString());
 //				values.clear();
 				
-				if (id != -1) 
-					Toast.makeText(NewsDetailActivity.this, "插入成功", Toast.LENGTH_SHORT).show();
-				else 
-					Toast.makeText(NewsDetailActivity.this, "插入失败", Toast.LENGTH_SHORT).show();
+//				if (id != -1) 
+//					Toast.makeText(NewsDetailActivity.this, "插入成功", Toast.LENGTH_SHORT).show();
+//				else 
+//					Toast.makeText(NewsDetailActivity.this, "插入失败", Toast.LENGTH_SHORT).show();
 				
 			}
         });
 	}
+	 
 }
