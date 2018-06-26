@@ -1,5 +1,7 @@
 package com.example.mynews.db;
 
+import com.example.mynews_bean.Comments;
+
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;

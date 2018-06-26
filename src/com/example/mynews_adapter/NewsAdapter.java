@@ -48,15 +48,6 @@ public class NewsAdapter extends BaseAdapter {
 	            //context:上下文, resource:要转换成view对象的layout的id, root:将layout用root(ViewGroup)包一层作为codify的返回值,一般传null  
 	            view = View.inflate(context, R.layout.item_news_layout, null);//将一个布局文件转换成一个view对象  
 	              
-	            //方法二  
-	            //通过LayoutInflater将布局转换成view对象  
-	            //view =  LayoutInflater.from(context).inflate(R.layout.item_news_layout, null);  
-	              
-	            //方法三：系统级开发  
-	            //通过context获取系统服务得到一个LayoutInflater，通过LayoutInflater将一个布局转换为view对象  
-	            //LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
-	            //view = layoutInflater.inflate(R.layout.item_news_layout, null);  
-	              
 	        }  
 	        //2.获取view上的子控件对象  
 	        ImageView item_img_icon = (ImageView) view.findViewById(R.id.item_img_icon);  

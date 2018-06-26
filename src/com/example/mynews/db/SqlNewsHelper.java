@@ -81,10 +81,12 @@ public class SqlNewsHelper extends SQLiteOpenHelper{
 	        db.endTransaction();
 }
 
-	@Override
-	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
+	@Override   
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
-		
+		db.execSQL("drop if table exists news_table");
+        db.execSQL("drop if table exists  comments_table");
+        onCreate(db);
 	}
 	
 	

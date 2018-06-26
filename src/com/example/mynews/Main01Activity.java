@@ -55,7 +55,6 @@ public class Main01Activity extends Activity {
 		Cursor c = cr.query(uri, null, null, null,null );
 		
         ArrayList<NewsBean> allNews = NewsUtils.getAllNews(mContext,c,typeid);  
-//        System.out.println("输出类型:"+id);
         //2.找到控件  
         ListView lv_news = (ListView) findViewById(R.id.lv_news);  
         //3.创建一个adapter设置给listview  
@@ -67,24 +66,17 @@ public class Main01Activity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
 				// TODO Auto-generated method stub
-				 //需要获取条目上bean对象中url做跳转  
-//				ListView item = (ListView) parent;
+				 //需要获取条目上bean对象
 		        NewsBean bean = (NewsBean) parent.getItemAtPosition(position);  
-		        
-        
-		        
-		        
-		        //System.out.println("输出时间时间--------："+bean.news_time);
 		        
 		        //跳转浏览器  
 		        Intent intent = new Intent(Main01Activity.this,NewsDetailActivity.class);
-		        
-		       
-//		        
+		                
 		        intent.putExtra("news_id",bean.id);
 		        intent.putExtra("title", (String)bean.title);
 		        intent.putExtra("des", (String)bean.des);
 		        intent.putExtra("news_time", (String)bean.news_time); 
+		        intent.putExtra("news_url", bean.news_url); 
 		        startActivity(intent);
 			}
 			
